@@ -3,7 +3,7 @@
 **▶ Abrir a demonstração:** https://edniltonbernardo63.github.io/Painel-operacional/
 
 Demonstração do painel operacional criado por **Ednilton Bernardo** para a gestão de um hub de última milha:
-Expedição, Parcel (desvios, Lost, avarias, pool, planejamento, Full) e Equipe em um só lugar, com relatório
+Expedição, Parcel (desvios, Lost, avarias, pool, planejamento, Full), Inventário (Looping, Alto valor agregado e pacotes voando no On Hold) e Equipe em um só lugar, com relatório
 em PDF.
 
 > **Todos os números, nomes, códigos de pacote e unidades desta demonstração são fictícios.**
@@ -18,7 +18,8 @@ em PDF.
 | **Equipe** | quadro de efetivo: ativos, escalas, turnos e líderes |
 | **Parcel** | Visão do Parcel (% do Parcel em destaque), Desvio de expedição (colaboradores por turno), Possíveis Lost (6–15 dias), Lost (> 15 dias), Avarias, Pool, Planejamento e Full |
 | **Expedição** | dashboard, Auto ADD, Não Coube, Volumosos, Recuperação, ranking do dia e posição da unidade entre os hubs |
-| **Relatório** | relatório do dia ou por período, com gráficos, para imprimir/salvar em PDF |
+| **Inventário** | Pacotes em Looping e Alto valor agregado (BR, status e justificativas), Pacotes voando (On Hold): quantos voaram no dia e quantos voltaram ao HUB, filtros por dia de voo, dia de entrada e turno, cruzado com o Desvio de expedição |
+| **Relatório** | relatório do dia ou por período, com gráficos e escolha das abas (inclui lista de motoristas e Inventário), para imprimir/salvar em PDF |
 
 Login da demonstração: os campos já vêm preenchidos — é só clicar em **Entrar** (qualquer e-mail e senha funcionam).
 
@@ -28,6 +29,8 @@ Login da demonstração: os campos já vêm preenchidos — é só clicar em **E
 ![Parcel](capturas/parcel.png)
 ![Desvio de expedição](capturas/desvio.png)
 ![Expedição](capturas/expedicao.png)
+![Inventário · Pacotes voando](capturas/inventario-voando.png)
+![Inventário · Looping](capturas/inventario-looping.png)
 
 ## Como funciona
 
