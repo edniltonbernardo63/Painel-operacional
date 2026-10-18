@@ -16,7 +16,9 @@
   :root{--bg:#111318; --card:#1a1d24; --line:#2a2e37; --tx:#eef0f4; --dim:#9aa1ad; --shp:#ee4d2d; --ok:#2ec4a6;}
   *{box-sizing:border-box}
   html,body{margin:0; height:100%; background:var(--bg); color:var(--tx); font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
-  body.abrindo #tela{display:none}
+  #painel{position:fixed; top:env(safe-area-inset-top); left:env(safe-area-inset-left); right:env(safe-area-inset-right); bottom:0; width:calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right)); height:calc(100% - env(safe-area-inset-top)); border:0; background:var(--bg); display:none;}
+  body.rodando #painel{display:block}
+  body.rodando #tela, body.abrindo #tela{display:none}
   #tela{min-height:100%; display:flex; align-items:center; justify-content:center; padding:calc(24px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));}
   .box{width:100%; max-width:460px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px;}
   .logo{display:flex; align-items:center; gap:12px; margin-bottom:14px}
@@ -39,6 +41,8 @@
 </head>
 <body>
 <div id="carregando"><div class="spin"></div><div>Abrindo o painel…</div><button class="sec" id="trocarAbrindo" style="width:auto">Trocar o link</button></div>
+
+<iframe id="painel" title="Painel" allow="clipboard-write; fullscreen"></iframe>
 
 <div id="tela">
   <div class="box">
@@ -72,14 +76,21 @@
   function valido(u) {
     return /^https:\/\/script\.google\.com\/(a\/macros\/[^\/]+|macros)\/s\/[A-Za-z0-9_-]+\/(exec|dev)(\?.*)?$/.test(String(u || '').trim());
   }
-  // Abre o painel direto (não dentro de outra página): assim o login do Google funciona no iPhone.
-  // Mostra 1,5 s a tela "Abrindo…" com o botão "Trocar o link" antes de ir.
+  // Abre o painel dentro do app, em tela cheia (a implantação está como "Qualquer pessoa").
+  // Mostra 1,2 s a tela "Abrindo…" com o botão "Trocar o link" antes de carregar.
   var timer = null;
   function abrir(u) {
     document.body.classList.add('abrindo');
-    timer = setTimeout(function () { location.replace(u); }, 1500);
+    timer = setTimeout(function () {
+      var f = $('painel');
+      f.onload = function () { document.body.classList.remove('abrindo'); };
+      setTimeout(function () { document.body.classList.remove('abrindo'); }, 15000);
+      f.src = u;
+      document.body.classList.add('rodando');
+    }, 1200);
   }
   function telaLink(msg) {
+    document.body.classList.remove('rodando');
     $('passoLink').hidden = false; $('passoInstalar').hidden = true;
     $('link').value = ler(CHAVE) || '';
     $('erro').textContent = msg || '';
@@ -113,7 +124,7 @@
   }
   $('continuar').onclick = function () { abrir(ler(CHAVE)); };
   $('trocar').onclick = function () { telaLink(); };
-  $('trocarAbrindo').onclick = function () { clearTimeout(timer); document.body.classList.remove('abrindo'); telaLink(); };
+  $('trocarAbrindo').onclick = function () { clearTimeout(timer); document.body.classList.remove('abrindo'); document.body.classList.remove('rodando'); $('painel').removeAttribute('src'); telaLink(); };
   $('fora').onclick = function () { var u = ler(CHAVE); if (u) window.open(u, '_blank'); };
   $('link').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('salvar').click(); });
 
