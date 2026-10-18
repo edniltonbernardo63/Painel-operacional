@@ -1,6 +1,6 @@
 {
-  "name": "Painel HUB · Equipe & Gestão",
-  "short_name": "Painel HUB",
+  "name": "HUB 142 · Equipe & Gestão",
+  "short_name": "HUB 142",
   "description": "Painel operacional do HUB (abre o painel publicado no Google Apps Script).",
   "lang": "pt-BR",
   "start_url": "./",
