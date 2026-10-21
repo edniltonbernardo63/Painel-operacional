@@ -77,18 +77,27 @@
     return /^https:\/\/script\.google\.com\/(a\/macros\/[^\/]+|macros)\/s\/[A-Za-z0-9_-]+\/(exec|dev)(\?.*)?$/.test(String(u || '').trim());
   }
   // Abre o painel dentro do app, em tela cheia (a implantação está como "Qualquer pessoa").
-  // Mostra 1,2 s a tela "Abrindo…" com o botão "Trocar o link" antes de carregar.
-  var timer = null;
+  // O endereço leva um número novo a cada abertura para o iPhone nunca mostrar uma versão guardada.
+  var timer = null, escondidoEm = 0;
+  function comCarimbo(u) { return u + (u.indexOf('?') === -1 ? '?' : '&') + 'app=' + Date.now(); }
+  function carregar(u) {
+    var f = $('painel');
+    f.onload = function () { document.body.classList.remove('abrindo'); };
+    setTimeout(function () { document.body.classList.remove('abrindo'); }, 15000);
+    f.src = comCarimbo(u);
+    document.body.classList.add('rodando');
+  }
   function abrir(u) {
     document.body.classList.add('abrindo');
-    timer = setTimeout(function () {
-      var f = $('painel');
-      f.onload = function () { document.body.classList.remove('abrindo'); };
-      setTimeout(function () { document.body.classList.remove('abrindo'); }, 15000);
-      f.src = u;
-      document.body.classList.add('rodando');
-    }, 1200);
+    timer = setTimeout(function () { carregar(u); }, 400);
   }
+  // iPhone deixa o app "congelado" em segundo plano: ao voltar depois de 3 min, recarrega o painel (pega a versão nova)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { escondidoEm = Date.now(); return; }
+    if (escondidoEm && Date.now() - escondidoEm > 3 * 60 * 1000 && document.body.classList.contains('rodando') && ler(CHAVE)) {
+      document.body.classList.add('abrindo'); carregar(ler(CHAVE));
+    }
+  });
   function telaLink(msg) {
     document.body.classList.remove('rodando');
     $('passoLink').hidden = false; $('passoInstalar').hidden = true;
