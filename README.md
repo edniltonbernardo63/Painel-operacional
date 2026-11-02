@@ -41,5 +41,34 @@ Login da demonstração: os campos já vêm preenchidos — é só clicar em **E
 - Os dados fictícios foram gerados rodando o próprio código do servidor sobre planilhas sintéticas, então os
   cálculos (médias, % sobre o processado, Lost, ranking, etc.) seguem exatamente as regras do painel.
 
+## Central de Painéis (app para o celular)
+
+**▶ Abrir:** https://edniltonbernardo63.github.io/Painel-operacional/central/
+
+A pasta `central/` é a Central de Painéis do HUB LSP-142 em versão instalável no celular, com ícone próprio
+(**Central 142**), abrindo em tela cheia e funcionando mesmo sem sinal para mostrar a lista de painéis.
+
+- **Os links dos painéis não ficam neste repositório** (ele é público). Eles ficam guardados só no aparelho.
+- O líder cadastra os painéis uma vez (menu **⋯ › Cadastrar painéis**) e envia o **link da equipe**
+  (menu **⋯ › Copiar link da equipe**) pelo WhatsApp. Quem abre esse link já recebe todos os painéis.
+- Para instalar: no iPhone, Safari › **Compartilhar** › **Adicionar à Tela de Início**; no Android, Chrome ›
+  menu **⋮** › **Instalar app**. A própria página mostra o passo a passo.
+- Mudou algum painel? Edite no seu aparelho e envie o link da equipe de novo.
+
+| Arquivo | Para que serve |
+|---|---|
+| `central/index.html` | a Central inteira (HTML, CSS e JavaScript) |
+| `central/manifest.webmanifest` | nome, cores e ícones do app |
+| `central/sw.js` | guarda a página para abrir rápido e sem sinal (os painéis sempre vêm ao vivo) |
+| `central/*.png`, `central/hero.jpg` | ícones e foto do galpão |
+
+**Problemas comuns**
+
+- *O ícone saiu genérico no iPhone:* adicione à Tela de Início pelo **Safari**, não por outro navegador.
+- *Abri pelo ícone e apareceu "Primeiro acesso":* o ícone foi criado antes de carregar o link da equipe.
+  Apague o ícone, abra o link da equipe no Safari e adicione de novo.
+- *Um painel não abre:* o link do Apps Script mudou (nova implantação). Atualize em **⋯ › Editar painéis**
+  e envie o link da equipe de novo.
+
 ---
 Criado por **Ednilton Bernardo**.
