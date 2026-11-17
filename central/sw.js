@@ -1,7 +1,7 @@
 /* Service worker da Central: guarda só a "casca" (página, ícones, foto) para abrir rápido e funcionar sem sinal.
    Sempre tenta a rede primeiro, então uma versão nova publicada aparece na próxima abertura.
    Os painéis (Google Apps Script) nunca passam por aqui: vêm direto da rede. */
-const CACHE = 'central-142-v1';
+const CACHE = 'central-142-v2';
 const CASCA = ['./', './index.html', './manifest.webmanifest', './hero.jpg', './favicon.png',
   './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', e => {

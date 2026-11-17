@@ -19,7 +19,7 @@
 :root{
   --bg:#0b0d12;--panel:#12151c;--panel2:#171b24;--line:rgba(255,255,255,.08);--txt:#eef0f4;--mut:#9aa1ad;
   --or:#ee4d2d;--or2:#ff7337;--glow:rgba(238,77,45,.35);
-  --L:#ffb020;--B:#ee4d2d;--D:#3ba7ff;--P:#2ecc8f;
+  --L:#ffb020;--B:#ee4d2d;--D:#3ba7ff;--P:#2ecc8f;--T:#a78bfa;
   --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box}
@@ -163,13 +163,15 @@ var AREAS={
   L:{n:'Liderança',d:'Gestão de líderes e turnos'},
   B:{n:'Produtividade',d:'Bipagem e produtividade'},
   D:{n:'Dashboard',d:'Painel operacional'},
-  P:{n:'Parcel',d:'Parcel e inventário'}
+  P:{n:'Parcel',d:'Parcel e inventário'},
+  T:{n:'Transporte',d:'LineHaul: carregamento e descarga de LT/LH'}
 };
 var ICONS={
   L:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>',
   B:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>',
   D:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
-  P:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>'
+  P:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>',
+  T:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v10H1z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="5.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>'
 };
 var I={
   ext:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>',
@@ -255,7 +257,7 @@ function shell(){
     '<svg viewBox="0 0 300 200" role="group" aria-label="Mapa do hub — escolha uma área para filtrar">'+
     '<rect x="2" y="2" width="296" height="196" rx="14" fill="#0e1117" stroke="rgba(255,255,255,.12)"/>'+
     '<g stroke="rgba(255,255,255,.04)">'+Array.from({length:14},function(_,i){return '<line x1="'+(20+i*20)+'" y1="8" x2="'+(20+i*20)+'" y2="192"/>'}).join('')+'</g>'+
-    zone('L',14,14,130,72)+zone('D',156,14,130,72)+zone('B',14,98,180,88)+zone('P',206,98,80,88)+
+    zone('L',14,14,130,72)+zone('D',156,14,130,72)+zone('B',14,98,128,88)+zone('T',150,98,64,88)+zone('P',222,98,64,88)+
     '<rect x="120" y="190" width="60" height="6" rx="3" fill="#ee4d2d"/></svg>'+
     '<div class="legend" id="legend"></div><div class="stats" id="stats"></div></div></aside>'+
   '<main><div class="head"><h2 id="ttl">Todos os painéis</h2><div id="tools"></div></div>'+
@@ -298,12 +300,13 @@ function ligarSetup(){
 }
 function zone(a,x,y,w,h){
   var c='var(--'+a+')',racks='',i,j;
-  if(a==='B'){for(i=0;i<5;i++)racks+='<rect x="'+(x+14+i*32)+'" y="'+(y+40)+'" width="22" height="34" rx="3" fill="'+c+'" fill-opacity=".35"/>'}
+  if(a==='T'){for(j=0;j<2;j++)racks+='<rect x="'+(x+10)+'" y="'+(y+36+j*24)+'" width="30" height="14" rx="2" fill="'+c+'" fill-opacity=".35"/><rect x="'+(x+42)+'" y="'+(y+40+j*24)+'" width="12" height="10" rx="2" fill="'+c+'" fill-opacity=".5"/>'}
+  if(a==='B'){for(i=0;i<Math.max(1,Math.floor((w-14)/32));i++)racks+='<rect x="'+(x+14+i*32)+'" y="'+(y+40)+'" width="22" height="34" rx="3" fill="'+c+'" fill-opacity=".35"/>'}
   if(a==='P'){for(i=0;i<2;i++)for(j=0;j<2;j++)racks+='<rect x="'+(x+12+i*30)+'" y="'+(y+38+j*22)+'" width="22" height="16" rx="2" fill="'+c+'" fill-opacity=".35"/>'}
   return '<g class="zone" data-a="'+a+'" tabindex="0" role="button" aria-label="Filtrar '+AREAS[a].n+'">'+
     '<rect class="z" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="10" fill="'+c+'" fill-opacity=".14" stroke="'+c+'" stroke-width="1.5"/>'+racks+
     '<text x="'+(x+12)+'" y="'+(y+24)+'" fill="'+c+'" font-size="17" font-weight="800">'+a+'</text>'+
-    '<text x="'+(x+30)+'" y="'+(y+23)+'" fill="#cfd3da" font-size="10.5" font-weight="600">'+AREAS[a].n+'</text></g>';
+    (w>=100?'<text x="'+(x+30)+'" y="'+(y+23)+'" fill="#cfd3da" font-size="10.5" font-weight="600">'+AREAS[a].n+'</text>':'')+'</g>';
 }
 function tick(){
   var el=$('clock');if(!el)return;var d=new Date();
