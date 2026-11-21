@@ -19,7 +19,7 @@
 :root{
   --bg:#0b0d12;--panel:#12151c;--panel2:#171b24;--line:rgba(255,255,255,.08);--txt:#eef0f4;--mut:#9aa1ad;
   --or:#ee4d2d;--or2:#ff7337;--glow:rgba(238,77,45,.35);
-  --L:#ffb020;--B:#ee4d2d;--D:#3ba7ff;--P:#2ecc8f;--T:#a78bfa;
+  --L:#ffb020;--B:#ee4d2d;--D:#3ba7ff;--P:#2ecc8f;--T:#a78bfa;--E:#ff6fb5;
   --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box}
@@ -163,6 +163,7 @@ var AREAS={
   L:{n:'Liderança',d:'Gestão de líderes e turnos'},
   B:{n:'Produtividade',d:'Bipagem e produtividade'},
   D:{n:'Dashboard',d:'Painel operacional'},
+  E:{n:'Expedição',d:'Separação e expedição de pacotes'},
   P:{n:'Parcel',d:'Parcel e inventário'},
   T:{n:'Transporte',d:'LineHaul: carregamento e descarga de LT/LH'}
 };
@@ -170,6 +171,7 @@ var ICONS={
   L:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>',
   B:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>',
   D:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+  E:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/><path d="M15.5 14.5l2-1"/></svg>',
   P:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>',
   T:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v10H1z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="5.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>'
 };
